@@ -7,13 +7,12 @@ import styles from './Todo.sass'
 
 class TodoList extends Component {
     render() {
-        console.log(this.props.todo);
-        console.log(this.props.toggleTodo);
-        // console.log(this.props);
+        // console.log(this.props.toggleTodo);
+        console.log(this);
         return (
             <div className="base">
                 {
-                    this.props.todo.map(todo =>
+                    this.props.todos.map(todo =>
                         <Todo
                             key={todo.id}
                             id={todo.id}
@@ -28,6 +27,6 @@ class TodoList extends Component {
     }
 }
 
-const mapStateToProps = state => ({todo: state});
+const mapStateToProps = state => state;
 
 export default connect(mapStateToProps, {toggleTodo})(TodoList);
