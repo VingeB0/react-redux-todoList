@@ -8,7 +8,7 @@ import styles from './Todo.sass'
 class TodoList extends Component {
     render() {
         // console.log(this.props.toggleTodo);
-        console.log(this);
+        console.log(this.props.toggleTodo);
         return (
             <div className="base">
                 {
@@ -27,6 +27,21 @@ class TodoList extends Component {
     }
 }
 
-const mapStateToProps = state => state;
+function mapStateToProps(state) {
+    return {
+        todos: getVisibleTodos(state.todos, state.filter)
+    }
+}
+
+function getVisibleTodos(todos, filter) {
+    switch (filter) {
+        case 'SHOW_ALL':
+            return  todos;
+        case 'SHOW_COMPLETED':
+            return  todos.filter(todo => todo.completed);
+        case 'SHOW_NEW':
+            return  todos.filter(todo => !todo.completed);
+    }
+}
 
 export default connect(mapStateToProps, {toggleTodo})(TodoList);

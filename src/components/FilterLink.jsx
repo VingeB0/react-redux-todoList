@@ -13,7 +13,7 @@ class FilterLink extends Component {
             children,
             onClick
         } = this.props;
-
+        console.log(this.props)
         if (active) {
             return <span className={styles.active} style={{color: 'red'}}>{children}</span>
         }
@@ -22,7 +22,13 @@ class FilterLink extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(FilterLink);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterLink);
+
+function mapStateToProps(state, ownProps) {
+    return {
+        active: ownProps.filter === state.filter
+    }
+}
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
